@@ -33,7 +33,7 @@ spec:
           - '{{customer}}.yaml'
       destination:
         server: https://kubernetes.default.svc
-        namespace: otel
+        namespace: '{{namespace}}'
       syncPolicy:
         automated: {}
         syncOptions:   
