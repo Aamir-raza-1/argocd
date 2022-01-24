@@ -8,16 +8,20 @@ spec:
   - list:
       elements:
       - customer: client1
+        namespace: client1
       - customer: client2
+        namespace: client2
       - customer: client3
+        namespace: client3
       - customer: client4
+        namespace: client4
   template:
     metadata:
       name: 'otel-{{customer}}'
       labels:
         app: otel
         env: dev
-      namespace: otel
+      namespace: '{{namespace}}'
     spec:
       project: otel-dev
       source:
