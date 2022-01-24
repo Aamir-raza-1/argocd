@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: otel
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - customer: client1
+      - customer: client2
+      - customer: client3
+      - customer: client4
+  template:
+    metadata:
+      name: 'otel-{{customer}}'
+      labels:
+        app: otel
+        env: dev
+      namespace: otel
+    spec:
+      project: otel-dev
+      source:
+        repoURL: https://github.com/Aamir-raza-1/argocd
+        targetRevision: HEAD
+        path: test-chart
+        helm:
+         valueFiles:
+          - '{{customer}}.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: otel
+      syncPolicy:
+        automated: {}
+        syncOptions:   
+        - CreateNamespace=true
