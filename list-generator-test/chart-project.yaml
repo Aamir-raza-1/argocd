@@ -8,6 +8,8 @@ spec:
   destinations:
   - namespace: otel
     server: https://kubernetes.default.svc
+  - namespace: 'cl*'
+    server: https://kubernetes.default.svc
   sourceRepos:
   - https://github.com/Aamir-raza-1/argocd
   clusterResourceWhitelist:
